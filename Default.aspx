@@ -39,6 +39,8 @@
                         <li id="flipv" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-road"></span>&nbsp;&nbsp;FlipV</a></li>
                         <li id="blur" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-eye-close"></span>&nbsp;&nbsp;Blur</a></li>
                         <li id="sharpen" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;Sharpen</a></li>
+                        <li id="brightness" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-certificate"></span>&nbsp;&nbsp;Brighten</a></li>
+                        <li id="threshold" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;Threshold</a></li>
                         <li id="reset" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;Reset</a></li>
                     </ul>
                 </div>

@@ -76,8 +76,8 @@ Filters.SetFilter = function (canvas,ctx,FilterName, args) {
     switch (FilterName)
     {
         case "desaturate": Filters.grayscale(); return;
-        case "brightness": Filters.brightness(args); return;
-        case "threshold": Filters.threshold(args); return;
+        case "brightness": Filters.brightness(10); return;
+        case "threshold": Filters.threshold(120); return;
         case "sharpen": Filters.sharpen(); return;
         case "blur": Filters.blur(); return;
         case "fliph": Filters.fliph(); return;
