@@ -1,0 +1,88 @@
+﻿html, body {
+height: 100%;
+margin: 0;
+padding: 0;
+}
+.canvas-panel {
+height: 100%;
+/*padding: 0;
+margin: 0;*/
+}
+.progress {
+background: none !important;
+border-radius: 0 !important;
+box-shadow: none;
+}
+#Menu li {
+border-bottom: 1px solid #2369A6;
+}
+
+.gallery-item {
+border:1px solid #EFEFEF;
+margin-left:3%;
+cursor:pointer;
+}
+
+.gallery-item:hover {
+    border: 1px solid #337ab7;
+}
+/*  Moustach  */
+.ms {
+    background-image: url("/img/moustaches.png");
+    display: block;
+}
+.ms-active {
+    border:1px solid #337ab7;
+}
+.ms-1 {
+    background-position: -49px -37px;
+    height: 35px;
+    width: 102px;
+}
+.ms-2 {
+    background-position: -305px -44px;
+    height: 35px;
+    margin-left: -11px;
+    width: 132px;
+}
+.ms-3 {
+background-position: -443px -48px;
+    height: 35px;
+    margin-left: -11px;
+    width: 96px;
+}
+.ms-4 {
+background-position: -44px -101px;
+    height: 35px;
+    width: 115px;
+}
+.ms-5 {
+background-position: -44px -167px;
+    height: 35px;
+    width: 115px;
+}
+.ms-6 {
+background-position: -188px -189px;
+    height: 35px;
+    width: 115px;
+}
+.ms-7 {
+background-position: -317px -182px;
+    height: 35px;
+    width: 115px;
+}
+.ms-8 {
+background-position: -453px -161px;
+    height: 35px;
+    width: 115px;
+}
+.ms-9 {
+background-position: -315px -101px;
+    height: 58px;
+    width: 115px;
+}
+.ms-10 {
+background-position: -44px -225px;
+    height: 59px;
+    width: 115px;
+}
