@@ -1,4 +1,4 @@
-# CanvasImageEditor-
+# Canvas Image Editor
 Image editor inside html5 canvas element
 
 * upload image into canvas
