@@ -7,7 +7,10 @@ Filters.CanvasHeight
 Filters.tmpCanvas = document.createElement('canvas');
 Filters.tmpCtx = Filters.tmpCanvas.getContext('2d');
 Filters.InitialImageData;
-
+Filters.isPen = false;
+Filters.mousePressed = false;
+Filters.lastX;
+Filters.lastY;
 /********************  Global Functions *********************************************/
 Filters.init = function (canvas,ctx) {
     
@@ -70,7 +73,9 @@ Filters.convolute = function (pixels, weights, opaque) {
 Filters.applyFilter = function (pixels) {
     Filters.ctx.putImageData(pixels, 0, 0);
 }
-Filters.SetFilter = function (canvas,ctx,FilterName, args) {
+Filters.SetFilter = function (canvas, ctx, FilterName, args) {
+    Filters.isPen = false;
+    canvas.css("cursor", "none");
     Filters.init(canvas, ctx);
 
     switch (FilterName)
@@ -190,6 +195,58 @@ Filters.custom = function (weights) {
 Filters.restore = function () {
     Filters.applyFilter(Filters.InitialImageData);
 };
+
+
+
+Filters.Pen = function (c, ctx, color, linewidth) {
+    c.css("cursor", "crosshair");
+    Filters.isPen = true;
+
+    c.mousedown(function (e) {
+        if (!Filters.isPen) {
+            e.stopPropagation();
+            return false;
+        }
+        var x = e.pageX - $(this).offset().left;
+        var y = e.pageY - $(this).offset().top;
+        Filters.mousePressed = true;
+        Filters.DrawWithPen(ctx, x, y, false, color, linewidth);
+    });
+
+    c.mousemove(function (e) {
+        if (!Filters.isPen) {
+            e.stopPropagation();
+            return false;
+        }
+        if (Filters.mousePressed) {
+            var x = e.pageX - $(this).offset().left;
+            var y = e.pageY - $(this).offset().top;
+            Filters.DrawWithPen(ctx,x, y, true, color, linewidth);
+        }
+    });
+
+    c.mouseup(function (e) {
+        Filters.mousePressed = false;
+    });
+    c.mouseleave(function (e) {
+        Filters.mousePressed = false;
+    });
+}
+Filters.DrawWithPen=function(ctx,x,y,isDown,color,linewidth)
+{
+    if (isDown) {
+        ctx.beginPath();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = linewidth;
+        ctx.lineJoin = "round";
+        ctx.moveTo(Filters.lastX, Filters.lastY);
+        ctx.lineTo(x, y);
+        ctx.closePath();
+        ctx.stroke();
+    }
+    Filters.lastX = x; Filters.lastY = y;
+}
+   
 /******************** END Filters *****************************************/
 
 

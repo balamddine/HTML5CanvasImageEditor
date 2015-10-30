@@ -5,7 +5,7 @@
     var width = 382;
     var height = 295;
     var ProgressPerc = 0;
-    var Pen = false;
+    var Pentool = false;
     $("#imageCanvas").width = width;
     $("#imageCanvas").height = height;
     $("#imageCanvas").attr("width", width + "px");
@@ -153,12 +153,15 @@
     }
     function PaintImage(filter) {
         $('.progress').css("display", "none");
-
+        
         var c = $("#imageCanvas");
         switch (filter)
         {
             case "gallery": showPreviewCanvas(); return;
             case "crop": Crop(); return;
+            case "pen":
+                Filters.Pen(c, ctx, "#000000", 1);
+                return;
             default: Filters.SetFilter(c, ctx, filter); return;
         }
             
