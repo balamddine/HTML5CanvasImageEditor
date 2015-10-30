@@ -10,6 +10,7 @@
     $("#imageCanvas").height = height;
     $("#imageCanvas").attr("width", width + "px");
     $("#imageCanvas").attr("height", height + "px");
+    $(".dv_crop").draggable({ containment: "#imageCanvas" }).resizable();
     
     uploadInput.on('change', function (e) {
         RemoveDisabledClass();
@@ -154,16 +155,40 @@
         $('.progress').css("display", "none");
 
         var c = $("#imageCanvas");
-        if (filter != "gallery")
+        switch (filter)
         {
-            Filters.SetFilter(c, ctx, filter); return;
-        }
-        else
-        {
-            showPreviewCanvas(); return;
+            case "gallery": showPreviewCanvas(); return;
+            case "crop": Crop(); return;
+            default: Filters.SetFilter(c, ctx, filter); return;
         }
             
     }
+    function Crop() {
+        var Img = new Image();
+        Img.onload = function () {};
+        Img.src = canvas.toDataURL();
+        Img.id = "img_Crop";
+        $("#Crop_dv").html(Img);
+        $('#img_Crop').Jcrop({
+                onChange: saveCoords,
+                //onSelect: showCoords
+            });
+    }
+    var x, y,x2,y2, w, h;
+    function saveCoords(c) {
+        x = c.x;
+        y = c.y;
+        x2 = c.x2;
+        y2 = c.y2;
+        w = c.w;
+        h = c.h;
+    }
+    $("#btn_saveCropitm").click(function () {
+        var img = document.getElementById("img_Crop");
+        var c = $("#imageCanvas");
+        Filters.Crop(c,ctx,img, x, y, w, h);
+        $("#CropModal").modal("hide");
+    });
     function showPreviewCanvas() {
         $("#dv_btns").css("display", "none");
         var previewCv = $("#cv_Preview");

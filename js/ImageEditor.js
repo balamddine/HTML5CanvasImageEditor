@@ -103,6 +103,15 @@ Filters.fliph = function () {
     }
     img.src = Filters.ctx.canvas.toDataURL();
 };
+Filters.Crop = function (c,ctx, imageObj, sourceX, sourceY, sourceWidth, sourceHeight) {
+    var img = new Image();
+    img.onload = function () {
+
+        ctx.drawImage(img, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, c[0].width, c[0].height);
+    }
+    img.src = imageObj.src;
+    
+}
 Filters.flipv = function () {
 
     var img = new Image();

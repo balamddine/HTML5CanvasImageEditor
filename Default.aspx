@@ -6,13 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Image Editor</title>
     <link href="css/Bootstrapv3.3.5.css" rel="stylesheet" />
+     
     <link href="css/site.css" rel="stylesheet" />
+    <link href="css/jquery.Jcrop.css" rel="stylesheet" />
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="js/jquery-ui.js"></script>
+    <script src="js/jquery.Jcrop.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/ImageEditor.js"></script>
     <script type="text/javascript" src="js/site.js"></script>
-
+    
 </head>
 <body>
     <nav class="navbar navbar-default">
@@ -45,24 +48,17 @@
                     </ul>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <ul class="nav nav-pills nav-stacked Menu">
-                        <li id="gallery" class="disabled"><a href="#GalleryModal" data-toggle="modal" data-backdrop="static"><span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;Gallery</a></li>
-                    </ul>
-                </div>
-            </div>
+           
         </div>
         <div class="row">
             <div class="col-lg-4">
                 <div id="dv_canvas" style="border: 1px solid #E5E5E5">
                     <div id="sketch">
-                        
-                        <canvas id="imageCanvas" class="pixastic"></canvas>
+                        <canvas id="imageCanvas" class="cv_img">
+                        </canvas>
                     </div>
                     <br />
-                   
-                    <div class="progress">
+                   <div class="progress">
                         <div class="progress-bar" id="ProgressBar" role="progressbar" aria-valuenow="0"
                             aria-valuemin="0" aria-valuemax="100">
                             <span id="sp_progressCount"></span>
@@ -75,7 +71,16 @@
                 <div class="alert alert-danger" id="dv_up_Error" style="display: none;"><span class="glyphicon glyphicon-alert"></span>&nbsp;Invalid image File</div>
                 <div class="alert alert-danger" id="dv_Error" style="display: none;"><span class="glyphicon glyphicon-alert"></span>&nbsp;Failed To Save Image</div>
             </div>
-
+            <div class="col-lg-2">
+             <div class="panel panel-default">
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked Menu">
+                        <li id="gallery" class="disabled"><a href="#GalleryModal" data-toggle="modal" data-backdrop="static"><span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;Gallery</a></li>
+                        <li id="crop" class="disabled" ><a href="#CropModal" data-toggle="modal" data-backdrop="static"><span class="glyphicon glyphicon-scissors"></span>&nbsp;&nbsp;Crop</a></li>
+                    </ul>
+                </div>
+            </div>
+                </div>
         </div>
         <div class="row">
             <div class="col-lg-4 col-lg-offset-2">
@@ -160,7 +165,6 @@
                         </div>
                         <div id="dv_btns" style="display: none">
                             <input type="button" id="btn_saveitm" class="btn btn-primary" value="confirm" />&nbsp;&nbsp;
-                            <input type="button" id="btn_cancel" class="btn btn-default" value="cancel" />
                         </div>
                     </div>
                     <%--<div class="modal-footer">
@@ -169,6 +173,24 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="CropModal" role="dialog" style="width:500px;left:30%;">
+            <div class="modal-dialog" style="width:500px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Crop Image</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="Crop_dv"></div>
+                        </div><br />
+                     <div id="dvCrp_btns" style="margin-left:20px">
+                            <input type="button" id="btn_saveCropitm" class="btn btn-primary" value="confirm" />&nbsp;&nbsp;
+                            
+                        </div>
+                    <br /><br />
+                    </div>
+                </div>
+            </div>
     </div>
 </body>
 </html>
