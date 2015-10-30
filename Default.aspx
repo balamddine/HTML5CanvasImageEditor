@@ -5,9 +5,9 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Image Editor</title>
-    <link href="css/Bootstrapv3.3.5.css" rel="stylesheet" />
-     
+    <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/site.css" rel="stylesheet" />
+    <link href="css/glyphicons.css" rel="stylesheet" />
     <link href="css/jquery.Jcrop.css" rel="stylesheet" />
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="js/jquery-ui.js"></script>
@@ -25,7 +25,7 @@
             </div>
             <div>
                 <ul class="nav navbar-nav">
-                    <li><a href="javascript:void(0)"  id="a_open"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Open</a></li>
+                    <li><a href="javascript:void(0)" id="a_open"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Open</a></li>
                     <li class="disabled" id="btn_save"><a href="javascript:void(0)"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;&nbsp;Save</a></li>
                     <li class="disabled" id="clear_Canvas"><a href="javascript:void(0)"><span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp; Clear Canvas</a></li>
                 </ul>
@@ -37,28 +37,27 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <ul class="nav nav-pills nav-stacked Menu">
-                        <li id="desaturate"  class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-adjust"></span>&nbsp;&nbsp;Desaturate</a></li>
+                        <li id="desaturate" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-adjust"></span>&nbsp;&nbsp;Desaturate</a></li>
                         <li id="fliph" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-road"></span>&nbsp;&nbsp;FlipH</a></li>
                         <li id="flipv" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-road"></span>&nbsp;&nbsp;FlipV</a></li>
-                        <li id="blur" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-eye-close"></span>&nbsp;&nbsp;Blur</a></li>
+                        <li id="blur" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-tint"></span>&nbsp;&nbsp;Blur</a></li>
                         <li id="sharpen" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp;Sharpen</a></li>
-                        <li id="brightness" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-certificate"></span>&nbsp;&nbsp;Brighten</a></li>
+                        <li id="brightness" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicons sun"></span>&nbsp;&nbsp;Brighten</a></li>
                         <li id="threshold" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-link"></span>&nbsp;&nbsp;Threshold</a></li>
                         <li id="reset" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;Reset</a></li>
                     </ul>
                 </div>
             </div>
-           
+
         </div>
         <div class="row">
             <div class="col-lg-4">
                 <div id="dv_canvas" style="border: 1px solid #E5E5E5">
                     <div id="sketch">
-                        <canvas id="imageCanvas" class="cv_img">
-                        </canvas>
+                        <canvas id="imageCanvas" class="cv_img"></canvas>
                     </div>
                     <br />
-                   <div class="progress">
+                    <div class="progress">
                         <div class="progress-bar" id="ProgressBar" role="progressbar" aria-valuenow="0"
                             aria-valuemin="0" aria-valuemax="100">
                             <span id="sp_progressCount"></span>
@@ -66,21 +65,35 @@
                     </div>
                 </div>
                 <br />
-                 <br />
-                 <br />
+                <br />
+                <br />
                 <div class="alert alert-danger" id="dv_up_Error" style="display: none;"><span class="glyphicon glyphicon-alert"></span>&nbsp;Invalid image File</div>
                 <div class="alert alert-danger" id="dv_Error" style="display: none;"><span class="glyphicon glyphicon-alert"></span>&nbsp;Failed To Save Image</div>
             </div>
             <div class="col-lg-2">
-             <div class="panel panel-default">
-                <div class="panel-body">
-                    <ul class="nav nav-pills nav-stacked Menu">
-                        <li id="gallery" class="disabled"><a href="#GalleryModal" data-toggle="modal" data-backdrop="static"><span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;Gallery</a></li>
-                        <li id="crop" class="disabled" ><a href="#CropModal" data-toggle="modal" data-backdrop="static"><span class="glyphicon glyphicon-scissors"></span>&nbsp;&nbsp;Crop</a></li>
-                    </ul>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <ul class="nav nav-pills nav-stacked Menu">
+                                    <li id="gallery" class="disabled"><a href="#GalleryModal" data-toggle="modal" data-backdrop="static"><span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;Gallery</a></li>
+                                    <li id="crop" class="disabled"><a href="#CropModal" data-toggle="modal" data-backdrop="static"><span class="glyphicon glyphicons crop"></span>&nbsp;&nbsp;Crop</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <ul class="nav nav-pills nav-stacked Menu">
+                                    <li id="undo" class="disabled"><a href="javascript:void(0);"><span class="glyphicon glyphicons undo"></span>&nbsp;&nbsp;Undo</a></li>
+                                    <li id="redo" class="disabled"><a href="javascript:void(0);"><span class="glyphicon glyphicons redo"></span>&nbsp;&nbsp;Redo</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-                </div>
         </div>
         <div class="row">
             <div class="col-lg-4 col-lg-offset-2">
@@ -89,7 +102,6 @@
                 </div>
             </div>
         </div>
-
         <div class="modal fade" id="GalleryModal" role="dialog">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -173,8 +185,8 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="CropModal" role="dialog" style="width:500px;left:30%;">
-            <div class="modal-dialog" style="width:500px">
+        <div class="modal fade" id="CropModal" role="dialog" style="width: 500px; left: 30%;">
+            <div class="modal-dialog" style="width: 500px">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -182,15 +194,17 @@
                     </div>
                     <div class="modal-body">
                         <div id="Crop_dv"></div>
-                        </div><br />
-                     <div id="dvCrp_btns" style="margin-left:20px">
-                            <input type="button" id="btn_saveCropitm" class="btn btn-primary" value="confirm" />&nbsp;&nbsp;
-                            
-                        </div>
-                    <br /><br />
                     </div>
+                    <br />
+                    <div id="dvCrp_btns" style="margin-left: 20px">
+                        <input type="button" id="btn_saveCropitm" class="btn btn-primary" value="confirm" />&nbsp;&nbsp;
+                            
+                    </div>
+                    <br />
+                    <br />
                 </div>
             </div>
+        </div>
     </div>
 </body>
 </html>
