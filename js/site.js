@@ -68,7 +68,9 @@
             var x = uiPos.left - offs.left;
             var y = uiPos.top - offs.top;
             DrawGalleryImg(img.find("div"), $(this), x, y);
+            
             $("#dv_btns").css("display", "block");
+            Filters.Push($("#imageCanvas")[0]);
     } });
     $("#btn_saveitm").click(function () {
         ctx.drawImage(document.getElementById("cv_Preview"), 0, 0);

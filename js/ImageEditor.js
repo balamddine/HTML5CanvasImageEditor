@@ -137,6 +137,7 @@ Filters.Crop = function (c,ctx, imageObj, sourceX, sourceY, sourceWidth, sourceH
     img.onload = function () {
 
         ctx.drawImage(img, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, c[0].width, c[0].height);
+        Filters.Push(c[0]);
     }
     img.src = imageObj.src;
     
