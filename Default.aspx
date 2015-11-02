@@ -15,7 +15,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/ImageEditor.js"></script>
     <script type="text/javascript" src="js/site.js"></script>
-    
+
 </head>
 <body>
     <nav class="navbar navbar-default">
@@ -32,7 +32,9 @@
             </div>
         </div>
     </nav>
+  
     <div class="col-lg-12">
+       
         <div class="col-lg-2">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -52,6 +54,7 @@
         </div>
         <div class="row">
             <div class="col-lg-4">
+
                 <div id="dv_canvas" style="border: 1px solid #E5E5E5">
                     <div id="sketch">
                         <canvas id="imageCanvas" class="cv_img"></canvas>
@@ -67,8 +70,6 @@
                 <br />
                 <br />
                 <br />
-                <div class="alert alert-danger" id="dv_up_Error" style="display: none;"><span class="glyphicon glyphicon-alert"></span>&nbsp;Invalid image File</div>
-                <div class="alert alert-danger" id="dv_Error" style="display: none;"><span class="glyphicon glyphicon-alert"></span>&nbsp;Failed To Save Image</div>
             </div>
             <div class="col-lg-2">
                 <div class="row">
@@ -79,6 +80,7 @@
                                     <li id="gallery" class="disabled"><a href="#GalleryModal" data-toggle="modal" data-backdrop="static"><span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;Gallery</a></li>
                                     <li id="crop" class="disabled"><a href="#CropModal" data-toggle="modal" data-backdrop="static"><span class="glyphicon glyphicons crop"></span>&nbsp;&nbsp;Crop</a></li>
                                     <li id="pen" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Pen</a></li>
+                                    <li id="alphabet" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-font"></span>&nbsp;&nbsp;Text</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -205,8 +207,45 @@
                     <br />
                 </div>
             </div>
+        </div><br />
+
+          <div id="dv_Alphabet" class="col-lg-8" style="display:none;">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-horizontal">
+                    <div class="form-group col-lg-3">
+                        <label>Text : </label>
+                        <input type="text" id="Alph_text" class="form-control" />
+                    </div>
+                    <div class="form-group col-lg-3" style="margin-left: 2px">
+                        <label>Color (Hex) : </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">#</span>
+                            <input type="text" id="Alph_color" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-2" style="margin-left: 2px">
+                        <label>Font-size : </label>
+                        <div class="input-group">
+                            <input type="number" id="Alph_size"  class="form-control" />
+                            <span class="input-group-addon">px</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2" style="margin-top:25px">
+                        <input type="button" class="btn btn-primary" value="Go" id="btn_AddText" />
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
+
+        <div class="col-lg-8">
+            <div class="alert alert-info" style="display: none" id="dv_Info_msg"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span id="Info_Msg"></span></div>
+        </div>
+
+    </div>
+
 </body>
 </html>
 

@@ -222,7 +222,14 @@ Filters.restore = function () {
 };
 
 
+Filters.AddText = function (c,ctx,font,size,color,text,x,y) {
+    ctx.font = size + "px "+ font;
+    ctx.fillStyle = "#"+color;
+    ctx.textAlign = "center";
+    ctx.fillText(text, x, y);
+    Filters.Push(c);
 
+}
 Filters.Pen = function (c, ctx, color, linewidth) {
     c.css("cursor", "crosshair");
     Filters.isPen = true;

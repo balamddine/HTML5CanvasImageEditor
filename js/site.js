@@ -6,6 +6,7 @@
     var height = 295;
     var ProgressPerc = 0;
     var Pentool = false;
+    var AlphabetTool = false;
     $("#imageCanvas").width = width;
     $("#imageCanvas").height = height;
     $("#imageCanvas").attr("width", width + "px");
@@ -22,7 +23,7 @@
     });
     $("#btn_save").click(function () {
         if ($("#btn_save").hasClass("disabled")) return;
-        $("#dv_Error").css("display", "none");
+        $("#dv_Info_msg").css("display", "none");
         var image = document.getElementById("imageCanvas").toDataURL("image/png");
        // image = image.replace('data:image/png;base64,', '');
         window.location.href = image;
@@ -75,7 +76,6 @@
     $("#btn_saveitm").click(function () {
         ctx.drawImage(document.getElementById("cv_Preview"), 0, 0);
         $("#GalleryModal").modal("hide");
-       
     });
     function handleImage(e) {
         var fileTypes = ['jpg', 'jpeg', 'png', 'bmp', 'gif'];
@@ -84,11 +84,12 @@
         var isSuccess = fileTypes.indexOf(extension) > -1;
         if (!isSuccess)
         {
-
-            $("#dv_up_Error").css("display", "block");
+            $("#dv_Info_msg").css("display", "block");
+            $("#Info_Msg").html("Invalid image File");
             return;
         }
-        $("#dv_up_Error").css("display", "none");
+        $("#dv_Info_msg").css("display", "none");
+        $("#Info_Msg").html("");
         var reader = new FileReader();
         reader.onload = function (event) {
             var img = new Image();
@@ -117,14 +118,11 @@
 
             if (event.lengthComputable) {   // does the progress know what's coming
                 p = parseInt(((event.loaded / event.total) * 100), 10);   // get the percent loaded
-               // str = Math.floor(p * 100) + "%";    // create the text
-
             } else {
                 p = event.loaded / 1024;   // show the kilobytes
                 str = Math.floor(p) + "k"; // the text
                 p = ((p / 50) % 1) * 100;   // make the progress bar cycle around every 50K
             }
-
             $('#ProgressBar').css('width', p + '%');
             $("#sp_progressCount").html(p+"%");
         }
@@ -139,8 +137,7 @@
         $("#cv_Preview").attr("width", width + "px");
         $("#cv_Preview").attr("height", height + "px");
 
-
-        $("#dv_canvas").css("width", width+30 + "px");
+        $("#dv_canvas").css("width", width + 30 + "px");
         $("#dv_canvas").css("height", height+30 + "px");
     }
     function RemoveActiveClass() {
@@ -166,10 +163,37 @@
             case "pen": Filters.Pen(c, ctx, "#000000", 1); return;
             case "undo": Filters.Undo(ctx); return;
             case "redo": Filters.Redo(ctx); return;
+            case "alphabet": AddText(); return;
             default: Filters.SetFilter(c, ctx, filter); return;
         }
             
     }
+    function AddText() {
+        AlphabetTool = true;
+        var c = $("#imageCanvas");
+        c.css("cursor", "text");
+        $("#dv_Alphabet").css("display", "block");
+        
+        c.click(function (e) {
+            if (!AlphabetTool) return;
+            c.css("cursor", "default");
+            $("#dv_Info_msg").css("display", "none");
+            $("#Info_Msg").html("");
+            var size = $("#Alph_size").val();
+            var color = $("#Alph_color").val();
+            var text = $("#Alph_text").val();
+            var offset = $(this).offset();
+            var x = e.pageX - offset.left;
+            var y = e.pageY - offset.top;
+            Filters.AddText(c[0],ctx, "Comic Sans MS", size, color, text, x, y);
+            AlphabetTool = false;
+        });
+    }
+    $("#btn_AddText").click(function () {
+        $("#dv_Info_msg").css("display", "block");
+        $("#Info_Msg").html("Click on canvas to draw");
+        $("#dv_Alphabet").css("display", "none");
+    });
     function Crop() {
         var Img = new Image();
         Img.onload = function () {};
@@ -221,7 +245,6 @@
         var img = new Image();
         img.onload = function () {
             PreviewCtx.drawImage(img, xPos, yPos, w, h, XposDraw, YposDraw, w, h);
-            
         }
         img.src = bg;
         PreviewCtx.restore();
