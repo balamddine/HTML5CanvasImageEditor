@@ -105,6 +105,8 @@
                 Filters.SetInitialImageData(d);
                 $('#ProgressBar').css('width', '100%');
                 $("#sp_progressCount").html("100%");
+
+                Filters.Push(canvas);
             }
             img.src = event.target.result;
         }
@@ -159,9 +161,9 @@
         {
             case "gallery": showPreviewCanvas(); return;
             case "crop": Crop(); return;
-            case "pen":
-                Filters.Pen(c, ctx, "#000000", 1);
-                return;
+            case "pen": Filters.Pen(c, ctx, "#000000", 1); return;
+            case "undo": Filters.Undo(ctx); return;
+            case "redo": Filters.Redo(ctx); return;
             default: Filters.SetFilter(c, ctx, filter); return;
         }
             

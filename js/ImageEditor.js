@@ -11,6 +11,8 @@ Filters.isPen = false;
 Filters.mousePressed = false;
 Filters.lastX;
 Filters.lastY;
+Filters.PushArray = new Array();
+Filters.Step = -1;
 /********************  Global Functions *********************************************/
 Filters.init = function (canvas,ctx) {
     
@@ -78,22 +80,44 @@ Filters.SetFilter = function (canvas, ctx, FilterName, args) {
     canvas.css("cursor", "none");
     Filters.init(canvas, ctx);
 
-    switch (FilterName)
-    {
-        case "desaturate": Filters.grayscale(); return;
-        case "brightness": Filters.brightness(10); return;
-        case "threshold": Filters.threshold(120); return;
-        case "sharpen": Filters.sharpen(); return;
-        case "blur": Filters.blur(); return;
-        case "fliph": Filters.fliph(); return;
-        case "flipv": Filters.flipv(); return;
-        case "reset": Filters.restore(); return;
-        case "custom": Filters.custom(args); return;
-
-        default: return;
+    switch (FilterName) {
+        case "desaturate": Filters.grayscale(); break;
+        case "brightness": Filters.brightness(10); break;
+        case "threshold": Filters.threshold(120); break;
+        case "sharpen": Filters.sharpen(); break;
+        case "blur": Filters.blur(); break;
+        case "fliph": Filters.fliph(); break;
+        case "flipv": Filters.flipv(); break;
+        case "reset": Filters.restore(); break;
+        case "custom": Filters.custom(args); break;
+        default: break;
     }
 
+    Filters.Push(canvas[0]);
+    return;
 };
+
+Filters.Push = function (c) {
+    Filters.Step++;
+    if (Filters.Step < Filters.PushArray.length) { Filters.PushArray.length = Filters.Step; }
+    Filters.PushArray.push(c.toDataURL());
+}
+Filters.Undo = function (ctx) {
+    if (Filters.Step > 0) {
+        Filters.Step--;
+        var Img = new Image();
+        Img.src = Filters.PushArray[Filters.Step];
+        Img.onload = function () { ctx.drawImage(Img, 0, 0); }
+    }
+}
+Filters.Redo=function(ctx) {
+    if (Filters.Step < Filters.PushArray.length - 1) {
+        Filters.Step++;
+        var Img = new Image();
+        Img.src = Filters.PushArray[Filters.Step];
+        Img.onload = function () { ctx.drawImage(Img, 0, 0); }
+    }
+}
 /******************** End Global Functions *********************************************/
 
 /********************  Filters *********************************************/
@@ -226,10 +250,16 @@ Filters.Pen = function (c, ctx, color, linewidth) {
     });
 
     c.mouseup(function (e) {
-        Filters.mousePressed = false;
+        if (Filters.mousePressed) {
+            Filters.mousePressed = false;
+            Filters.Push(c[0]);
+        }
     });
     c.mouseleave(function (e) {
-        Filters.mousePressed = false;
+        if (Filters.mousePressed) {
+            Filters.mousePressed = false;
+            Filters.Push(c[0]);
+        }
     });
 }
 Filters.DrawWithPen=function(ctx,x,y,isDown,color,linewidth)

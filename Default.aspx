@@ -78,7 +78,7 @@
                                 <ul class="nav nav-pills nav-stacked Menu">
                                     <li id="gallery" class="disabled"><a href="#GalleryModal" data-toggle="modal" data-backdrop="static"><span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;Gallery</a></li>
                                     <li id="crop" class="disabled"><a href="#CropModal" data-toggle="modal" data-backdrop="static"><span class="glyphicon glyphicons crop"></span>&nbsp;&nbsp;Crop</a></li>
-                                    <li id="pen" ><a href="javascript:void(0)"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Pen</a></li>
+                                    <li id="pen" class="disabled"><a href="javascript:void(0)"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Pen</a></li>
                                 </ul>
                             </div>
                         </div>
