@@ -46,7 +46,7 @@
         }); //ENd Ajax
         */
     }); //End Click event
-    $(".Menu").find("li").each(function () {
+    $(".Menu").each(function () {
         $(this).click(function () {
             if ($(this).hasClass("disabled")) return;
             RemoveActiveClass();
@@ -56,6 +56,7 @@
             PaintImage(id);
         });
     });
+    
     $("#clear_Canvas").click(function () {
         if ($(this).hasClass("disabled")) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -141,12 +142,12 @@
         $("#dv_canvas").css("height", height+30 + "px");
     }
     function RemoveActiveClass() {
-        $(".Menu").find("li").each(function () {
+        $(".Menu").each(function () {
             $(this).removeClass("active");
         });
     }
     function RemoveDisabledClass() {
-        $(".Menu").find("li").each(function () {
+        $(".Menu").each(function () {
             $(this).removeClass("disabled");
         });
         $("#btn_save").removeClass("disabled");
@@ -154,16 +155,15 @@
     }
     function PaintImage(filter) {
         $('.progress').css("display", "none");
-        
         var c = $("#imageCanvas");
         switch (filter)
         {
             case "gallery": showPreviewCanvas(); return;
             case "crop": Crop(); return;
-            case "pen": Filters.Pen(c, ctx, "#000000", 1); return;
+            case "pen": Filters.Pen(c, ctx, "#000000", 1); $("#undo").removeClass("disabled"); $("#redo").removeClass("disabled"); return;
             case "undo": Filters.Undo(ctx); return;
             case "redo": Filters.Redo(ctx); return;
-            case "alphabet": AddText(); return;
+            case "alphabet": AddText(); $("#undo").removeClass("disabled"); $("#redo").removeClass("disabled"); return;
             default: Filters.SetFilter(c, ctx, filter); return;
         }
             
@@ -172,7 +172,6 @@
         AlphabetTool = true;
         var c = $("#imageCanvas");
         c.css("cursor", "text");
-        $("#dv_Alphabet").css("display", "block");
         
         c.click(function (e) {
             if (!AlphabetTool) return;
@@ -192,7 +191,7 @@
     $("#btn_AddText").click(function () {
         $("#dv_Info_msg").css("display", "block");
         $("#Info_Msg").html("Click on canvas to draw");
-        $("#dv_Alphabet").css("display", "none");
+        $("#AlphabetModal").modal("hide");
     });
     function Crop() {
         var Img = new Image();

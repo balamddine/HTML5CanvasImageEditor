@@ -13,7 +13,9 @@ Filters.lastX;
 Filters.lastY;
 Filters.PushArray = new Array();
 Filters.Step = -1;
+
 /********************  Global Functions *********************************************/
+
 Filters.init = function (canvas,ctx) {
     
     Filters.ActiveCanvas = canvas;
@@ -77,7 +79,7 @@ Filters.applyFilter = function (pixels) {
 }
 Filters.SetFilter = function (canvas, ctx, FilterName, args) {
     Filters.isPen = false;
-    canvas.css("cursor", "none");
+    canvas.css("cursor", "default");
     Filters.init(canvas, ctx);
 
     switch (FilterName) {
@@ -118,9 +120,11 @@ Filters.Redo=function(ctx) {
         Img.onload = function () { ctx.drawImage(Img, 0, 0); }
     }
 }
+
 /******************** End Global Functions *********************************************/
 
 /********************  Filters *********************************************/
+
 Filters.fliph = function () {
   var img = new Image();
     img.onload = function () {
@@ -220,7 +224,6 @@ Filters.custom = function (weights) {
 Filters.restore = function () {
     Filters.applyFilter(Filters.InitialImageData);
 };
-
 
 Filters.AddText = function (c,ctx,font,size,color,text,x,y) {
     ctx.font = size + "px "+ font;
